@@ -374,8 +374,10 @@ ORDER BY title;
 ```
 
 output:
+```
 Calculus I
 Linear Algebra
 Machine Learning
 Probability
 Regression
+```
