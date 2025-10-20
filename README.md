@@ -62,7 +62,7 @@ Blank lines between results for readability
 
 ### 5. Result
 
-# 1. Students majoring in CS who started in 2023 or later
+### 1. Students majoring in CS who started in 2023 or later
 (Basic SELECT and WHERE filtering)
 
 query:
@@ -78,10 +78,11 @@ output:
 1008|Olivia|Garcia|CS|2024
 1001|He|Jiang|CS|2024
 
-# 2. For each department, find the average course capacity and total number of courses offered
+### 2. For each department, find the average course capacity and total number of courses offered
 (GROUP BY, aggregation)
 
 query:
+```sql
 SELECT d.dept_id,
        d.dept_name,
        ROUND(AVG(c.capacity), 2) AS avg_capacity,
@@ -90,21 +91,23 @@ FROM departments d
 JOIN courses c ON c.dept_id = d.dept_id
 GROUP BY d.dept_id, d.dept_name
 ORDER BY avg_capacity DESC;
-
+```
 output：
 MATH|Mathematics|52.5|2
 CS|Computer Science|35.0|3
 STAT|Statistics|35.0|3
 dept_id|dept_name|0.0|1
 
-# 3. Which 5 courses have the largest class capacities?
+### 3. Which 5 courses have the largest class capacities?
 (ORDER BY, LIMIT)
 
 query:
+```sql
 SELECT course_id, title, capacity
 FROM courses
 ORDER BY capacity DESC, title
 LIMIT 5;
+```
 
 result:
 course_id|title|capacity
@@ -113,10 +116,11 @@ MATH240|Linear Algebra|45
 CS101|Intro to Programming|40
 STAT201|Probability|40
 
-# 4. List each course title with its instructor’s name and department
+### 4. List each course title with its instructor’s name and department
 (INNER JOIN across 3 tables)
 
 query:
+```sql
 SELECT c.course_id,
        c.title,
        i.first_name || ' ' || i.last_name AS instructor,
@@ -125,6 +129,7 @@ FROM courses c
 JOIN instructors i ON i.instructor_id = c.instructor_id
 JOIN departments d ON d.dept_id = c.dept_id
 ORDER BY d.dept_name, c.title;
+```
 
 output:
 CS201|Data Structures|Alan Turing|Computer Science
@@ -136,10 +141,11 @@ STAT410|Machine Learning|Florence Nightingale|Statistics
 STAT201|Probability|Florence Nightingale|Statistics
 STAT301|Regression|Pierre Laplace|Statistics
 
-# 5. Show all students and their enrolled courses (including those not enrolled)
+### 5. Show all students and their enrolled courses (including those not enrolled)
 (LEFT JOIN for unmatched rows)
 
 query:
+```sql
 SELECT s.student_id,
        s.first_name || ' ' || s.last_name AS student,
        e.semester,
@@ -149,6 +155,7 @@ FROM students s
 LEFT JOIN enrollments e ON e.student_id = s.student_id
 LEFT JOIN courses c      ON c.course_id = e.course_id
 ORDER BY s.student_id, e.semester, c.title;
+```
 
 output:
 1001|He Jiang|2024FA|CS101|Intro to Programming
@@ -178,10 +185,11 @@ output:
 1012|Emma Brown|2023SP|STAT301|Regression
 
 
-# 6. Classify courses as Small (<35), Medium (35–50), or Large (>50)
+### 6. Classify courses as Small (<35), Medium (35–50), or Large (>50)
 (CASE WHEN conditional logic)
 
 query:
+```sql
 SELECT course_id,
        title,
        capacity,
@@ -192,6 +200,7 @@ SELECT course_id,
        END AS capacity_size
 FROM courses
 ORDER BY capacity DESC;
+```
 
 output:
 course_id|title|capacity|Large
@@ -204,10 +213,11 @@ STAT301|Regression|35|Medium
 CS301|Databases|30|Small
 STAT410|Machine Learning|30|Small
 
-# 7. Find all students who have taken at least one course taught by a STAT instructor
+### 7. Find all students who have taken at least one course taught by a STAT instructor
 (Subquery with IN and multi-table relationships)
 
 query:
+```sql
 SELECT DISTINCT s.student_id,
        s.first_name || ' ' || s.last_name AS student
 FROM students s
@@ -218,6 +228,7 @@ WHERE s.student_id IN (
   JOIN instructors i  ON i.instructor_id = c.instructor_id
   WHERE i.dept_id = 'STAT'
 );
+```
 
 output:
 1001|He Jiang
@@ -228,10 +239,11 @@ output:
 1011|Leo Rossi
 1012|Emma Brown
 
-# 8. Rank each student’s completed courses by alphabetical grade
+### 8. Rank each student’s completed courses by alphabetical grade
 (Window function RANK() with PARTITION BY)
 
 query:
+```sql
 SELECT e.student_id,
        e.course_id,
        e.semester,
@@ -243,6 +255,7 @@ SELECT e.student_id,
 FROM enrollments e
 WHERE e.grade IS NOT NULL
 ORDER BY e.student_id, grade_rank_alpha, e.course_id;
+```
 
 output:
 1001|STAT410|2025SP||1
@@ -271,10 +284,11 @@ output:
 1012|STAT301|2023SP|A|1
 1012|STAT201|2022FA|A-|2
 
-# 9. Using a CTE, find each student’s latest semester and number of courses in that term
+### 9. Using a CTE, find each student’s latest semester and number of courses in that term
 (WITH clause + aggregate + JOIN)
 
 query:
+```sql
 WITH latest AS (
   SELECT student_id, MAX(semester) AS latest_sem
   FROM enrollments
@@ -291,6 +305,7 @@ LEFT JOIN enrollments e
       AND e.semester   = l.latest_sem
 GROUP BY l.student_id, s.first_name, s.last_name, l.latest_sem
 ORDER BY classes_in_latest_sem DESC, student;
+```
 
 output:
 1001|He Jiang|2025SP|2
@@ -306,10 +321,11 @@ output:
 1004|Sara Ng|2024SP|1
 1010|Zara Khan|2025SP|1
 
-# 10A. Replace NULL grades with “Not Graded” for readability
+### 10A. Replace NULL grades with “Not Graded” for readability
 (COALESCE function)
 
 query:
+```sql
 SELECT e.enroll_id,
        e.student_id,
        e.course_id,
@@ -317,6 +333,7 @@ SELECT e.enroll_id,
        COALESCE(e.grade, 'Not Graded') AS grade_display
 FROM enrollments e
 ORDER BY e.student_id, e.semester, e.course_id;
+```
 
 output:
 1|1001|CS101|2024FA|A-
@@ -345,14 +362,16 @@ output:
 24|1012|STAT201|2022FA|A-
 25|1012|STAT301|2023SP|A
 
-# 10B. Combine all unique course titles from MATH and STAT departments
+### 10B. Combine all unique course titles from MATH and STAT departments
 (UNION set operation)
 
 query:
+```sql
 SELECT title FROM courses WHERE dept_id = 'MATH'
 UNION
 SELECT title FROM courses WHERE dept_id = 'STAT'
 ORDER BY title;
+```
 
 output:
 Calculus I
