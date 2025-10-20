@@ -1,0 +1,9 @@
+course_id,title,dept_id,credits,instructor_id,capacity
+CS101,Intro to Programming,CS,3,1,40
+CS201,Data Structures,CS,3,2,35
+CS301,Databases,CS,3,3,30
+MATH101,Calculus I,MATH,4,4,60
+MATH240,Linear Algebra,MATH,3,4,45
+STAT201,Probability,STAT,3,5,40
+STAT301,Regression,STAT,3,6,35
+STAT410,Machine Learning,STAT,3,5,30
