@@ -62,7 +62,7 @@ Blank lines between results for readability
 
 ### 5. Result
 
-1. Students majoring in CS who started in 2023 or later
+# 1. Students majoring in CS who started in 2023 or later
 (Basic SELECT and WHERE filtering)
 
 query:
@@ -78,7 +78,7 @@ output:
 1008|Olivia|Garcia|CS|2024
 1001|He|Jiang|CS|2024
 
-2. For each department, find the average course capacity and total number of courses offered
+# 2. For each department, find the average course capacity and total number of courses offered
 (GROUP BY, aggregation)
 
 query:
@@ -97,7 +97,7 @@ CS|Computer Science|35.0|3
 STAT|Statistics|35.0|3
 dept_id|dept_name|0.0|1
 
-3. Which 5 courses have the largest class capacities?
+# 3. Which 5 courses have the largest class capacities?
 (ORDER BY, LIMIT)
 
 query:
@@ -113,7 +113,7 @@ MATH240|Linear Algebra|45
 CS101|Intro to Programming|40
 STAT201|Probability|40
 
-4. List each course title with its instructor’s name and department
+# 4. List each course title with its instructor’s name and department
 (INNER JOIN across 3 tables)
 
 query:
@@ -136,7 +136,7 @@ STAT410|Machine Learning|Florence Nightingale|Statistics
 STAT201|Probability|Florence Nightingale|Statistics
 STAT301|Regression|Pierre Laplace|Statistics
 
-5. Show all students and their enrolled courses (including those not enrolled)
+# 5. Show all students and their enrolled courses (including those not enrolled)
 (LEFT JOIN for unmatched rows)
 
 query:
@@ -178,7 +178,7 @@ output:
 1012|Emma Brown|2023SP|STAT301|Regression
 
 
-6. Classify courses as Small (<35), Medium (35–50), or Large (>50)
+# 6. Classify courses as Small (<35), Medium (35–50), or Large (>50)
 (CASE WHEN conditional logic)
 
 query:
@@ -204,7 +204,7 @@ STAT301|Regression|35|Medium
 CS301|Databases|30|Small
 STAT410|Machine Learning|30|Small
 
-7. Find all students who have taken at least one course taught by a STAT instructor
+# 7. Find all students who have taken at least one course taught by a STAT instructor
 (Subquery with IN and multi-table relationships)
 
 query:
@@ -228,7 +228,7 @@ output:
 1011|Leo Rossi
 1012|Emma Brown
 
-8. Rank each student’s completed courses by alphabetical grade
+# 8. Rank each student’s completed courses by alphabetical grade
 (Window function RANK() with PARTITION BY)
 
 query:
@@ -271,7 +271,7 @@ output:
 1012|STAT301|2023SP|A|1
 1012|STAT201|2022FA|A-|2
 
-9. Using a CTE, find each student’s latest semester and number of courses in that term
+# 9. Using a CTE, find each student’s latest semester and number of courses in that term
 (WITH clause + aggregate + JOIN)
 
 query:
@@ -306,7 +306,7 @@ output:
 1004|Sara Ng|2024SP|1
 1010|Zara Khan|2025SP|1
 
-10A. Replace NULL grades with “Not Graded” for readability
+# 10A. Replace NULL grades with “Not Graded” for readability
 (COALESCE function)
 
 query:
@@ -345,7 +345,7 @@ output:
 24|1012|STAT201|2022FA|A-
 25|1012|STAT301|2023SP|A
 
-10B. Combine all unique course titles from MATH and STAT departments
+# 10B. Combine all unique course titles from MATH and STAT departments
 (UNION set operation)
 
 query:
