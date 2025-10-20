@@ -73,10 +73,12 @@ WHERE major_dept = 'CS'
 ORDER BY start_year, last_name, first_name;
 
 output:
+```
 1004|Sara|Ng|CS|2023
 1011|Leo|Rossi|CS|2023
 1008|Olivia|Garcia|CS|2024
 1001|He|Jiang|CS|2024
+```
 
 ### 2. For each department, find the average course capacity and total number of courses offered
 (GROUP BY, aggregation)
@@ -93,10 +95,12 @@ GROUP BY d.dept_id, d.dept_name
 ORDER BY avg_capacity DESC;
 ```
 output：
+```
 MATH|Mathematics|52.5|2
 CS|Computer Science|35.0|3
 STAT|Statistics|35.0|3
 dept_id|dept_name|0.0|1
+```
 
 ### 3. Which 5 courses have the largest class capacities?
 (ORDER BY, LIMIT)
@@ -110,11 +114,13 @@ LIMIT 5;
 ```
 
 result:
+```
 course_id|title|capacity
 MATH101|Calculus I|60
 MATH240|Linear Algebra|45
 CS101|Intro to Programming|40
 STAT201|Probability|40
+```
 
 ### 4. List each course title with its instructor’s name and department
 (INNER JOIN across 3 tables)
@@ -132,6 +138,7 @@ ORDER BY d.dept_name, c.title;
 ```
 
 output:
+```
 CS201|Data Structures|Alan Turing|Computer Science
 CS301|Databases|Grace Hopper|Computer Science
 CS101|Intro to Programming|Ada Lovelace|Computer Science
@@ -140,6 +147,7 @@ MATH240|Linear Algebra|Carl Gauss|Mathematics
 STAT410|Machine Learning|Florence Nightingale|Statistics
 STAT201|Probability|Florence Nightingale|Statistics
 STAT301|Regression|Pierre Laplace|Statistics
+```
 
 ### 5. Show all students and their enrolled courses (including those not enrolled)
 (LEFT JOIN for unmatched rows)
@@ -158,6 +166,7 @@ ORDER BY s.student_id, e.semester, c.title;
 ```
 
 output:
+```
 1001|He Jiang|2024FA|CS101|Intro to Programming
 1001|He Jiang|2025SP|CS301|Databases
 1001|He Jiang|2025SP|STAT410|Machine Learning
@@ -183,7 +192,7 @@ output:
 1011|Leo Rossi|2024SP|STAT410|Machine Learning
 1012|Emma Brown|2022FA|STAT201|Probability
 1012|Emma Brown|2023SP|STAT301|Regression
-
+```
 
 ### 6. Classify courses as Small (<35), Medium (35–50), or Large (>50)
 (CASE WHEN conditional logic)
@@ -203,6 +212,7 @@ ORDER BY capacity DESC;
 ```
 
 output:
+```
 course_id|title|capacity|Large
 MATH101|Calculus I|60|Large
 MATH240|Linear Algebra|45|Medium
@@ -212,6 +222,7 @@ CS201|Data Structures|35|Medium
 STAT301|Regression|35|Medium
 CS301|Databases|30|Small
 STAT410|Machine Learning|30|Small
+```
 
 ### 7. Find all students who have taken at least one course taught by a STAT instructor
 (Subquery with IN and multi-table relationships)
@@ -231,6 +242,7 @@ WHERE s.student_id IN (
 ```
 
 output:
+```
 1001|He Jiang
 1002|Mina Kim
 1005|Liam O'Neil
@@ -238,6 +250,7 @@ output:
 1009|Ethan Wong
 1011|Leo Rossi
 1012|Emma Brown
+```
 
 ### 8. Rank each student’s completed courses by alphabetical grade
 (Window function RANK() with PARTITION BY)
@@ -258,6 +271,7 @@ ORDER BY e.student_id, grade_rank_alpha, e.course_id;
 ```
 
 output:
+```
 1001|STAT410|2025SP||1
 1001|CS301|2025SP|A|2
 1001|CS101|2024FA|A-|3
@@ -283,6 +297,7 @@ output:
 1011|STAT410|2024SP|B+|2
 1012|STAT301|2023SP|A|1
 1012|STAT201|2022FA|A-|2
+```
 
 ### 9. Using a CTE, find each student’s latest semester and number of courses in that term
 (WITH clause + aggregate + JOIN)
@@ -308,6 +323,7 @@ ORDER BY classes_in_latest_sem DESC, student;
 ```
 
 output:
+```
 1001|He Jiang|2025SP|2
 1006|Ava Chen|2025SP|1
 1003|Diego Ramirez|2023SP|1
@@ -320,6 +336,7 @@ output:
 1008|Olivia Garcia|2025SP|1
 1004|Sara Ng|2024SP|1
 1010|Zara Khan|2025SP|1
+```
 
 ### 10A. Replace NULL grades with “Not Graded” for readability
 (COALESCE function)
@@ -336,6 +353,7 @@ ORDER BY e.student_id, e.semester, e.course_id;
 ```
 
 output:
+```
 1|1001|CS101|2024FA|A-
 2|1001|CS301|2025SP|A
 3|1001|STAT410|2025SP|
@@ -361,6 +379,7 @@ output:
 23|1011|STAT410|2024SP|B+
 24|1012|STAT201|2022FA|A-
 25|1012|STAT301|2023SP|A
+```
 
 ### 10B. Combine all unique course titles from MATH and STAT departments
 (UNION set operation)
